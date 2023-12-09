@@ -8,3 +8,9 @@ resource "aws_key_pair" "laravel_keypair" {
   key_name   = var.keypair
   public_key = tls_private_key.ppk
 }
+
+resource "local_file" "ssh_key" {
+  filename        = "laravel-keypair.pem"
+  content         = tls_private_key.ppk.private_key_pem
+  file_permission = "0400"
+}
