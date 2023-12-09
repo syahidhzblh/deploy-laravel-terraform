@@ -20,6 +20,24 @@ resource "aws_instance" "ec2_laravel" {
 
   EOF
 
+  provisioner "remote-exec" {
+    inline = [
+      "cd /var/www/html",
+      "sudo rm index.nginx-debian.html",
+      "git clone https://github.com/nasirkhan/laravel-starter.git",
+      "sudo curl -sS https://getcomposer.org/installer | php",
+      "sudo mv composer.phar /usr/local/bin/composer",
+      "sudo composer install",
+      "sudo cp .env.exampe .env",
+      "mysql_secure_installation",
+      "mysql -u root -p",
+      "CREATE DATABASE laravel_starter;",
+      "CREATE USER 'laravel_user'@'localhost' IDENTIFIED BY 'Laravel123!!!';",
+      "GRANT ALL PRIVILEGES ON laravel_starter.* TO 'laravel_user'@'localhost' IDENTIFIED BY 'Laravel123!!!';",
+      "FLUSH PRIVILEGES;",
+    ]
+  }
+
 
   tags = {
     Name    = "laravel-server-tf"
