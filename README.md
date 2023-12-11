@@ -5,13 +5,13 @@ Terraform is Infrastructure as a Code (IaaC), it can use for automation/provisio
 
 ## Descriptions
 
-Laravel Application Name : Laravel Starter from nasirkhan
-Laravel Version : 10
-Github Link : https://github.com/nasirkhan/laravel-starter
-Node Version : 8
-PHP Version : 8
-Database : MySQL
-WebServer : Nginx
+- Laravel Application Name : Laravel Starter from nasirkhan
+- Laravel Version : 10
+- Github Link : https://github.com/nasirkhan/laravel-starter
+- Node Version : 8
+- PHP Version : 8
+- Database : MySQL
+- WebServer : Nginx
 
 ## Provider
 
