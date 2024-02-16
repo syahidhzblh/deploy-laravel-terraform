@@ -1,10 +1,11 @@
 variable "laravel_port" {
   type    = list(any)
-  default = [80, 8080, 433, 22, 2222]
+  default = [80, 8888, 8080, 433, 22, 2222]
 }
 
 resource "aws_security_group" "laravel-sg" {
-  name = "laravel-sg"
+  name   = "laravel-sg"
+  vpc_id = var.vpc_prod
 
   dynamic "ingress" {
     for_each = var.laravel_port
