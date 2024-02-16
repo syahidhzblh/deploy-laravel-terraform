@@ -1,0 +1,5 @@
+---
+- include_tasks: db.yml
+- include_tasks: node_npm.yml
+- include_tasks: laravel_config.yml
+- include_tasks: nginx.yml

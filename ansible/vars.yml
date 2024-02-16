@@ -1,0 +1,7 @@
+mysql:
+  host: 127.0.0.1
+  root:
+    user: root
+    password: toor
+  laravel:
+    password: Laravel123!!!

@@ -1,0 +1,20 @@
+---
+- name: Configure Nginx
+  tasks:
+    - name: Create Laravel Configuration Server
+      file:
+        path: /etc/nginx/sites-enabled/laravel.conf
+        state: touch
+    
+    - name: Edit Larvel Configuration Server
+      shell: echo "{{lookup ('file', 'laravel_example.conf')}} > /etc/nginx/sites-enabled/laravel.conf"
+
+    - name: Copy laravel.conf to sites-avalaible
+      shell: sudo ln /etc/nginx/sites-available/laravel-server /etc/nginx/sites-enabled
+
+    - name: Check Configuration & Reload Nginx
+      shell: "{{item}}"
+      with_items:
+        - nginx -t
+        - unlink Default
+        - sudo systemctl reload nginx
