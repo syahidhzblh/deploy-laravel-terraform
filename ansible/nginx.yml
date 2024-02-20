@@ -5,12 +5,19 @@
       file:
         path: /etc/nginx/sites-enabled/laravel.conf
         state: touch
+
+    - name: Copy File laravel.conf to node
+      src: /Users/user/Desktop/deploy-laravel-terraform/ansible/conf/laravel_example.conf
+      dest: /etc/nginx/sites-enabled
+
+    - name: Rename laravel conf
+      shell: mv /etc/nginx/sites-enabled/laravel_example.conf /etc/nginx/sites-enabled/laravel.conf
     
     - name: Edit Larvel Configuration Server
       shell: echo "{{lookup ('file', 'laravel_example.conf')}} > /etc/nginx/sites-enabled/laravel.conf"
 
     - name: Copy laravel.conf to sites-avalaible
-      shell: sudo ln /etc/nginx/sites-available/laravel-server /etc/nginx/sites-enabled
+      shell: sudo ln /etc/nginx/sites-enabled/laravel-server /etc/nginx/sites-available
 
     - name: Check Configuration & Reload Nginx
       shell: "{{item}}"

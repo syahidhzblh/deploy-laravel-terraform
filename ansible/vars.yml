@@ -5,3 +5,6 @@ mysql:
     password: toor
   laravel:
     password: Laravel123!!!
+  aws:
+   access_key: AKIASGNQVGKC7MH625MB
+   secret: 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

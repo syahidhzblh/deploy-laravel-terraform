@@ -1,0 +1,41 @@
+---
+- name: Install & Configure Laravel Pack
+  tasks:
+    - name: Get Url Composer
+      get_url: 
+        url: https://getcomposer.org/installer
+      dest: /usr/local/bin/composer
+
+    - name: Rename Composer Excutable
+      shell: mv /usr/local/bin/composer /usr/local/bin/composer.phar
+
+    - name: Install Composer
+      shell: composer install
+
+    - name: Clone Git Repository Laravel Starter
+      git:
+        repo: https://github.com/nasirkhan/laravel-starter.git
+        dest: /var/www/
+      become: yes
+
+    - name: Duplicate Env File
+      shell: copy /var/www/laravel_starter/.env.example /var/www/laravel_starter/.env
+    
+    - name: Edit Env File
+      shell: "{{item}}"
+      with_items:
+        - sed -i 's/APP_URL=http://laravel-starter.local/APP_URL=13.211.159.163/g' /var/www/laravel_starter/.env
+        - sed -i 's/DB_USERNAME=/DB_USERNAME=laravel/g' /var/www/laravel_starter/.env
+        - sed -i 's/DB_PASSWORD=/DB_PASSWORD="{{mysql.laravel.password}}"/g' /var/www/laravel_starter/.env
+
+    - name: Migrate DB Laravel
+      shell: "{{item}}"
+      with_items:
+        - sudo php artisan migrate --seed
+        - sudo php artisan key:generate
+
+    - name: Set Required File Permission
+      shell: "{{item}}"
+      with_items:
+       - sudo chown -R www-data:www-data /var/www/html/laravel-starter/
+       - sudo chmod -R 755 /var/www/html/laravel-starter
