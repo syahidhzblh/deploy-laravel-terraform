@@ -1,32 +1,29 @@
 ---
-- name: Install & Configure DB
-  vars_files: vars.yml
-  tasks:
-    - name: Start Service mysql
-      shell: "service mysql start"
+- name: Start Service mysql
+  shell: "service mysql start"
     
-    - name: Update Default Root Password MySQL
-      mysql_user: 
-        name: root
-        host: "{{mysql.host}}"
-        password: "{{mysql.root.password}}"
-        login_user: "{{mysql.root.user}}"
-        login_password: "{{mysql.root.password}}"
-        check_implict_admin: yes
-        priv: "*.*:ALL,GRANT"
-    
-    - name: Create Laravel Database
-      mysql_db:
-        name: laravel_starter
-        state: present
-        login_user: "{{mysql.root.user}}"
-        login_password: "{{mysql.root.password}}"
+- name: Update Default Root Password MySQL
+  mysql_user: 
+    name: root
+    host: "{{mysql.host}}"
+    password: "{{mysql.root.password}}"
+    login_user: "{{mysql.root.user}}"
+    login_password: "{{mysql.root.password}}"
+    check_implict_admin: yes
+    priv: "*.*:ALL,GRANT"
 
-    - name: Create User DB laravel
-      mysql_user:
-        name: laravel
-        host: "{{mysql.host}}"
-        password: "{{mysql.laravel.password}}"
-        login_user: "{{mysql.root.user}}"
-        login_password: "{{mysql.root.password}}"
-        priv: "*.laravel_starter:ALL,GRANT"
+- name: Create Laravel Database
+  mysql_db:
+    name: laravel_starter
+    state: present
+    login_user: "{{mysql.root.user}}"
+    login_password: "{{mysql.root.password}}"
+
+- name: Create User DB laravel
+  mysql_user:
+    name: laravel
+    host: "{{mysql.host}}"
+    password: "{{mysql.laravel.password}}"
+    login_user: "{{mysql.root.user}}"
+    login_password: "{{mysql.root.password}}"
+    priv: "*.laravel_starter:ALL,GRANT"

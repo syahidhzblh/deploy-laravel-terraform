@@ -1,8 +1,5 @@
 ---
-- name: Package Installation
-  hosts: all
-  tasks:
-    - name: Install Nodejs
-      apt:
-        name: nodejs
-        state: present
+- name: Install Nodejs
+  apt:
+    name: nodejs
+    state: present
