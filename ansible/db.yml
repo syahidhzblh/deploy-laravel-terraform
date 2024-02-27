@@ -11,7 +11,7 @@
     password: "{{mysql.root.password}}"
     login_user: "{{mysql.root.user}}"
     login_password: "{{mysql.root.password}}"
-    check_implict_admin: yes
+    check_implicit_admin: yes
     priv: "*.*:ALL,GRANT"
 
 - name: Create Laravel Database

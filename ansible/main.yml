@@ -1,6 +1,7 @@
 ---
 - name: Setup Laravel App Server
   hosts: webserver
+  become: true
   vars_files: vars.yml
   environment:
     AWS_ACCESS_KEY_ID: "{{aws.access_key}}"
