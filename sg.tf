@@ -1,6 +1,6 @@
 variable "laravel_port" {
   type    = list(any)
-  default = [80, 8888, 8080, 433, 22, 2222]
+  default = [80, 8888, 8080, 443, 22, 2222]
 }
 
 resource "aws_security_group" "laravel-sg" {
