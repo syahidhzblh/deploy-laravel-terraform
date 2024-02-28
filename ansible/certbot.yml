@@ -1,0 +1,21 @@
+---
+- name: Install certbot
+  apt:
+    name: certbot
+    state: latest
+
+- name: Install depdencies tool certbot
+  apt:
+    name: python3-certbot-nginx
+    state: latest
+
+- name: Copy letsencrypt.conf to snippets
+  copy:
+    src: /Users/user/Desktop/deploy-laravel-terraform/ansible/conf/letsencrypt.conf
+    dest: /etc/nginx/snippets
+
+- name: Reload Nginx
+  service: name=nginx state=restarted
+
+- name: Reload nginx & Generate ssl via certbot
+  shell: certbot --nginx --agree-tos -d test.hisbul.my.id

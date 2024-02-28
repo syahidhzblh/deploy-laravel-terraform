@@ -1,2 +1,2 @@
 [laravel]
-13.211.159.163 ansible_ssh_user=ubuntu
+13.210.136.140 ansible_ssh_user=ubuntu ansible_port=2222

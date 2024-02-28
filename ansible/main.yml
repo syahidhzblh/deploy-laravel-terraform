@@ -1,11 +1,8 @@
 ---
 - name: Setup Laravel App Server
-  hosts: webserver
-  become: true
+  hosts: laravel
   vars_files: vars.yml
-  environment:
-    AWS_ACCESS_KEY_ID: "{{aws.access_key}}"
-    AWS_SECRET_ACCESS_KEY: "{{aws.secret}}"
+  become: true
   tasks:
     - name: Excutable all yml files
       include_tasks: "{{item}}"
@@ -14,3 +11,4 @@
       - node_npm.yml
       - laravel_config.yml
       - nginx.yml
+      - certbot.yml

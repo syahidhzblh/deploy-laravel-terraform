@@ -46,4 +46,4 @@
   shell: "{{item}}"
   with_items:
    - chown -R www-data:www-data /var/www/laravel_starter_app
-   - chmod -R 755 /var/www/html/laravel_starter_app
+   - chmod -R 755 /var/www/laravel_starter_app

@@ -28,4 +28,4 @@
     password: "{{mysql.laravel.password}}"
     login_user: "{{mysql.root.user}}"
     login_password: "{{mysql.root.password}}"
-    priv: "*.laravel_starter:ALL,GRANT"
+    priv: "laravel_starter.*:ALL,GRANT"
