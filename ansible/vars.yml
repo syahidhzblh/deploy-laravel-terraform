@@ -6,5 +6,7 @@ mysql:
   laravel:
     password: Laravel123!!!
   aws:
-   access_key: access_key
-   secret: secret
+    access_key: access_key
+    secret: secret
+  web:
+    domain: test.hisbul.my.id

@@ -12,6 +12,18 @@
 - name: Rename laravel conf
   shell: mv /etc/nginx/sites-enabled/laravel_example.conf /etc/nginx/sites-enabled/laravel.conf
 
+- name: Curl public ip & Regitser
+  shell: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: public_ip_var
+
+- name: Edit laravel.conf
+  lineinfile:
+    regexp: "{{item.regexp}}"
+    line: "{{item.line}}"
+  loop:
+    - {regexp: 'server_name YOUR_DOMAIN;', line: 'server_name {{web.domain}};'}
+    - {regexp: 'proxy_pass http://YOUR_DOMAIN:8000;', line: 'proxy_pass http://{{public_ip_var}};'}
+
 - name: Copy laravel.conf to sites-avalaible
   shell: sudo ln /etc/nginx/sites-enabled/laravel.conf /etc/nginx/sites-available
 

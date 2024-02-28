@@ -18,13 +18,17 @@
 - name: Duplicate Env File
   shell: cp /var/www/laravel_starter_app/.env.example /var/www/laravel_starter_app/.env
 
+- name: Curl public ip instance & register
+  shell: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: public_ip_var
+
 - name: Edit Env File
   lineinfile:
     path: /var/www/laravel_starter_app/.env
     regexp: "{{item.regexp}}"
     line: "{{item.line}}"
   loop:
-    - {regexp: 'APP_URL=http://laravel-starter.local', line: 'APP_URL=13.210.136.140'}
+    - {regexp: 'APP_URL=http://laravel-starter.local', line: 'APP_URL={{public_ip_var}}'}
     - {regexp: 'DB_USERNAME=', line: 'DB_USERNAME=laravel'}
     - {regexp: 'DB_PASSWORD=', line: 'DB_PASSWORD={{mysql.laravel.password}}'}
 

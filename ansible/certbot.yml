@@ -17,5 +17,8 @@
 - name: Reload Nginx
   service: name=nginx state=restarted
 
+- name: Regitser certbot
+  shell: certbot -n register --agree-tos --email support@hisbul.my.id
+
 - name: Reload nginx & Generate ssl via certbot
-  shell: certbot --nginx --agree-tos -d test.hisbul.my.id
+  shell: certbot -n --nginx -d test.hisbul.my.id
