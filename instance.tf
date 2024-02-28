@@ -21,7 +21,7 @@ resource "aws_instance" "ec2_laravel" {
     apt install -y php-cli php-xml php-curl php-zip php-mbstring php-dom php8.1-mysql
     apt install -y mysql-server
     apt install -y nodejs
-    apt install -y ansible python3
+    apt install -y ansible python3 python3-pip
     systemctl start nginx
     service php8.1-fpm start
   EOF
