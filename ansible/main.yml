@@ -7,6 +7,7 @@
     - name: Excutable all yml files
       include_tasks: "{{item}}"
       with_items:
+      - pip_install.yml
       - db.yml
       - node_npm.yml
       - laravel_config.yml

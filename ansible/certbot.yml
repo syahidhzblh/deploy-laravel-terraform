@@ -9,9 +9,10 @@
     name: python3-certbot-nginx
     state: latest
 
+#Dont forget to replace src path, match on directory
 - name: Copy letsencrypt.conf to snippets
   copy:
-    src: /Users/user/Desktop/deploy-laravel-terraform/ansible/conf/letsencrypt.conf
+    src: /home/bizzy/deploy-laravel-terraform/ansible/conf/letsencrypt.conf
     dest: /etc/nginx/snippets
 
 - name: Reload Nginx

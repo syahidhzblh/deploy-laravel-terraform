@@ -4,9 +4,10 @@
     path: /etc/nginx/sites-enabled/laravel.conf
     state: touch
 
+#Dont forget to replace src path, match on directory
 - name: Copy File laravel.conf to node
   copy:
-    src: /Users/user/Desktop/deploy-laravel-terraform/ansible/conf/laravel_example.conf
+    src: /home/bizzy/deploy-laravel-terraform/ansible/conf/laravel_example.conf
     dest: /etc/nginx/sites-enabled
 
 - name: Rename laravel conf
@@ -18,11 +19,13 @@
 
 - name: Edit laravel.conf
   lineinfile:
+    path: /etc/nginx/sites-enabled/laravel.conf
     regexp: "{{item.regexp}}"
     line: "{{item.line}}"
   loop:
     - {regexp: 'server_name YOUR_DOMAIN;', line: 'server_name {{web.domain}};'}
-    - {regexp: 'proxy_pass http://YOUR_DOMAIN:8000;', line: 'proxy_pass http://{{public_ip_var}};'}
+    - {regexp: 'server_name YOUR_DOMAIN;', line: 'server_name {{web.domain}};'}
+    - {regexp: 'proxy_pass http://YOUR_DOMAIN:8000;', line: 'proxy_pass http://{{public_ip_var.stdout}};'}
 
 - name: Copy laravel.conf to sites-avalaible
   shell: sudo ln /etc/nginx/sites-enabled/laravel.conf /etc/nginx/sites-available

@@ -28,7 +28,7 @@
     regexp: "{{item.regexp}}"
     line: "{{item.line}}"
   loop:
-    - {regexp: 'APP_URL=http://laravel-starter.local', line: 'APP_URL={{public_ip_var}}'}
+    - {regexp: 'APP_URL=http://laravel-starter.local', line: 'APP_URL={{public_ip_var.stdout}}'}
     - {regexp: 'DB_USERNAME=', line: 'DB_USERNAME=laravel'}
     - {regexp: 'DB_PASSWORD=', line: 'DB_PASSWORD={{mysql.laravel.password}}'}
 

@@ -8,5 +8,6 @@ mysql:
   aws:
     access_key: access_key
     secret: secret
-  web:
-    domain: test.hisbul.my.id
+
+web:
+  domain: test.hisbul.my.id
