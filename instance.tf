@@ -25,11 +25,21 @@ resource "aws_instance" "ec2_laravel" {
     service php8.1-fpm start
   EOF
 
+  provisioner "remote-exec" {
+    connection {
+      host        = aws_instance.ec2_laravel.public_ip
+      user        = "ubuntu"
+      port        = 2222
+      private_key = file("ansible/${var.keypair}.pem")
+    }
+    inline = ["echo 'Connected!'"]
+  }
+
   provisioner "local-exec" {
-    command = [
-      "ansible-playbook ansible/main.yml --private-key=${var.keypair}.pem",
-      "sed -i '' 's/public/${aws_instance.ec2_laravel.public_ip}/g' Users/user/Desktop/deploy-laravel-terraform/ansible/hosts"
-    ]
+    command = <<-EOF
+      sed -i '' -e 's/public/${aws_instance.ec2_laravel.public_ip}/g' /Users/user/Desktop/deploy-laravel-terraform/ansible/hosts
+      ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/main.yml --private-key=ansible/${var.keypair}.pem
+    EOF
   }
 
   tags = {

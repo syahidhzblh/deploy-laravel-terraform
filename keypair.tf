@@ -10,7 +10,7 @@ resource "aws_key_pair" "laravel_keypair" {
 }
 
 resource "local_file" "ssh_key" {
-  filename        = "laravel-keypair.pem"
+  filename        = "/Users/user/Desktop/deploy-laravel-terraform/ansible/laravel-keypair.pem"
   content         = tls_private_key.ppk.private_key_pem
   file_permission = "0400"
 }
