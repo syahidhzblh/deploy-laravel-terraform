@@ -2,7 +2,7 @@ resource "aws_instance" "ec2_laravel" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.laravel-sg.id]
-  key_name               = "server-keypair"
+  key_name               = var.keypair
   subnet_id              = var.subnet_prod
 
   ebs_block_device {
@@ -25,11 +25,14 @@ resource "aws_instance" "ec2_laravel" {
     service php8.1-fpm start
   EOF
 
+  provisioner "local-exec" {
+    command = "ansible-playbook ansible/main.yml --private-key=${var.keypair}.pem"
+  }
 
   tags = {
     Name    = "laravel-server-tf"
     Env     = "Production"
-    Service = "Web Server"
+    Service = "laravel-app-server"
     Owner   = "Devops"
   }
 

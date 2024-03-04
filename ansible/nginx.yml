@@ -7,7 +7,7 @@
 #Dont forget to replace src path, match on directory
 - name: Copy File laravel.conf to node
   copy:
-    src: /home/bizzy/deploy-laravel-terraform/ansible/conf/laravel_example.conf
+    src: /Users/user/Desktop/deploy-laravel-terraform/ansible/conf/laravel_example.conf
     dest: /etc/nginx/sites-enabled
 
 - name: Rename laravel conf
