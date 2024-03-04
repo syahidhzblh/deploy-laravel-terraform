@@ -26,11 +26,14 @@ resource "aws_instance" "ec2_laravel" {
   EOF
 
   provisioner "local-exec" {
-    command = "ansible-playbook ansible/main.yml --private-key=${var.keypair}.pem"
+    command = [
+      "ansible-playbook ansible/main.yml --private-key=${var.keypair}.pem",
+      "sed -i '' 's/public/${aws_instance.ec2_laravel.public_ip}/g' Users/user/Desktop/deploy-laravel-terraform/ansible/hosts"
+    ]
   }
 
   tags = {
-    Name    = "laravel-server-tf"
+    Name    = "laravel-server-new"
     Env     = "Production"
     Service = "laravel-app-server"
     Owner   = "Devops"
