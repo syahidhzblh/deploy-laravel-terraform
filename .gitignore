@@ -6,7 +6,7 @@
 **/.terraform/*
 
 ##PEM
-**/.pem
+**/*.pem
 
 # .tfstate files
 *.tfstate
