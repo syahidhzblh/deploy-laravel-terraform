@@ -1,7 +1,7 @@
 # Deploy Laravael Terraform
 
-This project for Deploy Laravel Application on AWS with Terraform.
-Terraform is Infrastructure as a Code (IaaC), it can use for automation/provisioning/build infrastructure on Cloud Platform.
+This project for Deploy Laravel Application on AWS EC2 with Terraform and Ansible.
+Terraform is Infrastructure as a Code (IaaC), it can use for automation/provisioning/build infrastructure on Cloud Platform and also Ansible as Configuration Management.
 
 ## Descriptions
 
@@ -12,7 +12,13 @@ Terraform is Infrastructure as a Code (IaaC), it can use for automation/provisio
 - PHP Version : 8
 - Database : MySQL
 - WebServer : Nginx
+- SSL : Letsencrypt with certbot
 
 ## Provider
 
 AWS
+
+## Tools
+
+Terraform : Infrastructure Provisioning
+Ansible : Configuration Management
