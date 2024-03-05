@@ -35,12 +35,21 @@ resource "aws_instance" "ec2_laravel" {
     inline = ["echo 'Connected!'"]
   }
 
+  #For Mac
   provisioner "local-exec" {
     command = <<-EOF
       sed -i '' -e 's/public/${aws_instance.ec2_laravel.public_ip}/g' /Users/user/Desktop/deploy-laravel-terraform/ansible/hosts
-      ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/main.yml --private-key=ansible/${var.keypair}.pem
+      sleep 200 && ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/main.yml --private-key=ansible/${var.keypair}.pem
     EOF
   }
+
+  #For Linux
+  # provisioner "local-exec" {
+  #   command = <<-EOF
+  #     sed -i 's/public/${aws_instance.ec2_laravel.public_ip}/g' ansible/hosts
+  #     ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/main.yml --private-key=ansible/${var.keypair}.pem
+  #   EOF
+  # }
 
   tags = {
     Name    = "laravel-server-new"
